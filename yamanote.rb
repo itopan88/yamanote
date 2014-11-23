@@ -124,7 +124,8 @@ end
 if __FILE__ == $0
 
   runner = Runner.new
-  aa_lines = AsciiArts.new.yamanote_lines 
+  asciiarts = AsciiArts.new
+  aa_lines = asciiarts.yamanote_lines 
 
   # do parse options
   option={}
@@ -137,15 +138,15 @@ if __FILE__ == $0
   end
 
   if option[:l] then
-    aa_lines = AsciiArts.new.yamanote_lines_little 
+    aa_lines = asciiarts.yamanote_lines_little 
   end
   
   if option[:j] then
-    aa_lines = AsciiArts.new.yamanote_lines_little_joint 
+    aa_lines = asciiarts.new.yamanote_lines_little_joint 
   end
   
   if option[:m] then
-    runner.display(AsciiArts.new.yamanote_routemap)
+    runner.display(asciiarts.new.yamanote_routemap)
     exit 0
   end
   
