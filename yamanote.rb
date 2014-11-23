@@ -130,11 +130,21 @@ if __FILE__ == $0
   # do parse options
   option={}
   OptionParser.new do |opt|
-    opt.on('-l','runs a little yamanote'){|v| option[:l] = v}
+    opt.on('-d','display yamanote'){|v| option[:d] = v}
     opt.on('-j','runs little joint yamanote'){|v| option[:j] = v}
-    opt.on('-s VALUE','specify the running speed:VALUE = "exfast" or "fast" or "normal" or "slow"'){|v| option[:s] = v}
+    opt.on('-l','runs a little yamanote'){|v| option[:l] = v}
     opt.on('-m','show yamanote routemap'){|v| option[:m] = v}
+    opt.on('-s VALUE','specify the running speed:VALUE = "fastest" or "fast" or "normal" or "slow"'){|v| option[:s] = v}
     opt.parse!(ARGV)
+  end
+
+  if option[:s] then
+    case option[:s] 
+      when "fastest" then runner.setspeed(0.005)
+      when "fast"    then runner.setspeed(0.02)
+      when "normal"  then runner.setspeed(0.04)
+      when "slow"    then runner.setspeed(0.08)
+    end
   end
 
   if option[:l] then
@@ -142,23 +152,19 @@ if __FILE__ == $0
   end
   
   if option[:j] then
-    aa_lines = asciiarts.new.yamanote_lines_little_joint 
+    aa_lines = asciiarts.yamanote_lines_little_joint 
   end
   
   if option[:m] then
-    runner.display(asciiarts.new.yamanote_routemap)
+    runner.display(asciiarts.yamanote_routemap)
+    exit 0
+  end
+ 
+  if option[:d] then
+    runner.display(aa_lines)
     exit 0
   end
   
-  if option[:s] then
-    case option[:s] 
-      when "exfast" then runner.setspeed(0.005)
-      when "fast"   then runner.setspeed(0.02)
-      when "normal" then runner.setspeed(0.04)
-      when "slow"   then runner.setspeed(0.08)
-    end
-  end
-
   #go 
   runner.run(aa_lines)
 
