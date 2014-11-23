@@ -4,8 +4,8 @@
 
 #使い方
  ```ruby
-
- ruby yamanote.rb
+ git clone https://github.com/itopan88/yamanote
+ ruby yamanote/yamanote.rb
 
  ```
 
